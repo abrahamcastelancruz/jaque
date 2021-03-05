@@ -1,0 +1,84 @@
+@import '../../../stylus/typographi.styl'
+@import '../../../stylus/base.styl';
+
+headingStyle()
+  color #5D97D1
+  font-size 2.3rem
+
+buttonMobile()
+  font-size 1rem
+  color #ffffff
+  margin 0 auto
+  margin-bottom 1rem
+  width 95%
+
+.register-hero
+  display none
+
+.register
+  background-image linear-gradient(to top, #a3bded 0%, #6991c7 100%)
+  height 100vh
+  display flex
+  justify-content center
+  align-items center
+  >.register-container
+    background-color #ffffff
+    padding 2rem 1rem
+    width 80%
+    max-height 85%
+    overflow auto
+    margin 0 auto
+    text-align center
+    border-radius .6rem
+    box-shadow 0 0 1.5rem 0 rgba(0,0,0,0.5)
+    >.title
+      headingStyle()
+      font-size 1.5rem
+    &>.register-data
+      margin-top 1.2rem
+
+mat-form-field
+  width 85%
+  margin-bottom .8rem
+
+.login
+  display block
+  margin-top 1.3rem
+  >span
+    color primary-dark
+
+a
+  text-decoration none
+  color #000000
+
+@media screen and (min-width 1024px)
+  .register-page
+    display grid
+    grid-template-columns repeat(2, 50%)
+    height 100vh
+    >.register-hero
+      display block
+      background-image url('../../../assets/images/registerHeroBg.png')
+      background-repeat no-repeat
+      background-size cover
+      background-position center center
+      display flex
+      justify-content center
+      align-items center
+      >img
+        width 90%
+
+@media screen and (min-width 1440px)
+  .register-page
+    display grid
+    grid-template-columns 40% 60%
+    height 100vh
+    >.register-hero
+      background-size cover
+      background-position center top
+      max-height 100%
+      >img
+        width 70%
+
+  .register-container
+    max-width 60%
