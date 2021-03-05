@@ -1,0 +1,105 @@
+@import '../../../stylus/typographi.styl'
+@import '../../../stylus/base.styl';
+
+headingStyle()
+  color #5D97D1
+  font-size 2.3rem
+
+buttonMobile()
+  font-size 1rem
+  color #ffffff
+  margin 0 auto
+  margin-bottom 1rem
+  width 95%
+
+.login-hero
+  display none
+
+.login
+  background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+  height 100vh
+  display flex
+  justify-content center
+  align-items center
+  >.login-container
+    background-color #ffffff
+    padding 2rem 1rem
+    width 80%
+    max-height 80%
+    overflow auto
+    margin 0 auto
+    text-align center
+    border-radius .6rem
+    box-shadow 0 0 1.5rem 0 rgba(0,0,0,0.5)
+    >.title
+      headingStyle()
+      font-size 1.5rem
+    &>.login-data
+      margin-top 1.2rem
+      &>hr
+        margin 0 auto
+        margin-top 2rem
+        width 80%
+      >.social-login
+        width 90%
+        margin 0 auto
+        margin-top 1.5rem
+        display flex
+        flex-direction column
+        >.facebook
+          background-color #3b5998
+          buttonMobile()
+          font-weight 400
+        &>.google
+          buttonMobile()
+          color primary-dark
+
+mat-form-field
+  width 85%
+  margin-bottom .8rem
+
+.icon
+  font-size 1.3rem
+
+.button-text
+  margin-left .3rem
+
+@media screen and (min-width 1024px)
+  .login-page
+    display grid
+    grid-template-columns repeat(2, 50%)
+    height 100vh
+    >.login-hero
+      display block
+      background-image url('../../../assets/images/loginHeroBg.png')
+      background-repeat no-repeat
+      background-size cover
+      background-position center center
+      display flex
+      justify-content center
+      align-items center
+      >img
+        width 80%
+
+  .login
+    background-image none
+    >.login-container
+      box-shadow 0 0 1.5rem 0 rgba(0,0,0,0.3)
+      >.title
+        font-size 2rem
+
+@media screen and (min-width 1440px)
+  .login-page
+    display grid
+    grid-template-columns 60% 40%
+    height 100vh
+    >.login-hero
+      background-size cover
+      background-position center
+      max-height 100%
+      >img
+        width 50%
+
+  .login-container
+    max-width 60%
+

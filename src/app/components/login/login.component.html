@@ -1,0 +1,73 @@
+<main class="login-page">
+  <article class="login-hero">
+    <img
+      class="image-hero"
+      src="assets/images/loginHero.png"
+      alt="Login Hero Image"
+    />
+  </article>
+  <article class="login">
+    <section class="login-container">
+      <h1 class="title">¡Bienvenido de Nuevo!</h1>
+      <div class="login-data">
+        <h2 class="title-secondary">Inicio de Sesión</h2>
+        <form [formGroup]="loginForm" class="login-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Correo Electrónico : </mat-label>
+            <input
+              type="email"
+              matInput
+              formControlName="email"
+              placeholder="someone@somemail.com"
+            />
+            <mat-error *ngIf="loginForm.get('email').invalid">
+              Debes ingresar un correo <strong>válido</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Contraseña : </mat-label>
+            <input
+              matInput
+              formControlName="password"
+              [type]="togglePassword ? 'password' : 'text'"
+              placeholder="***********"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="togglePassword = !togglePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="togglePassword"
+            >
+              <mat-icon>{{
+                togglePassword ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('password').invalid">
+              Debes ingresar una contraseña
+            </mat-error>
+          </mat-form-field>
+          <button
+            type="submit"
+            class="btn login-btn"
+            mat-raised-button
+            (click)="login()"
+          >
+            Iniciar Sesión
+          </button>
+        </form>
+        <hr />
+        <div class="social-login">
+          <button mat-raised-button class="btn facebook">
+            <fa-icon [icon]="faFacebook" class="icon"></fa-icon>
+            <span class="button-text">Inicia sesión con Facebook</span>
+          </button>
+          <button mat-raised-button class="btn google">
+            <fa-icon [icon]="faGoogle" class="icon google-icon"></fa-icon>
+            <span class="button-text">Inicia sesión con Google</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
