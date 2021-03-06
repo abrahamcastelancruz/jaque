@@ -1,5 +1,11 @@
 import { FormGroup } from '@angular/forms';
 
+/*  Function used to match two form controls,
+ *   in this case this functions helps
+ *   RegisterComponent to verify if password
+ *   & confirmPassword Match
+ */
+
 export function ConfirmedValidator(
   controlName: string,
   matchingControlName: string

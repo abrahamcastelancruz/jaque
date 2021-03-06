@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.styl'],
 })
 export class RegisterComponent implements OnInit {
+  // General properties
   registerForm: FormGroup;
   togglePassword = true;
   toggleConfirmPassword = true;
@@ -33,13 +34,14 @@ export class RegisterComponent implements OnInit {
     this.user = new UserModel();
   }
 
+  // Initializing register form
   initializeForm(): void {
     this.registerForm = this.fb.group(
       {
         username: new FormControl('', Validators.required),
         email: new FormControl('', [
           Validators.required,
-          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'), // Validating email by Regex
         ]),
         password: new FormControl('', [
           Validators.required,
@@ -50,7 +52,7 @@ export class RegisterComponent implements OnInit {
           Validators.minLength(6),
         ]),
       },
-      { validator: ConfirmedValidator('password', 'confirmPassword') }
+      { validator: ConfirmedValidator('password', 'confirmPassword') } // Custom validator for PasswordMatch
     );
   }
 
@@ -63,7 +65,7 @@ export class RegisterComponent implements OnInit {
         allowOutsideClick: false,
       });
       Swal.showLoading();
-      const { username, email, password } = this.registerForm.value;
+      const { username, email, password } = this.registerForm.value; // Destructuring register form
       this.user = {
         email: email,
         password: password,
@@ -85,6 +87,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  // Function to validate error in login form
   hasError = (controlName: string, errorName: string) => {
     return this.registerForm.controls[controlName].hasError(errorName);
   };

@@ -7,7 +7,7 @@
   <h3 align="center">Front-End Technical Evaluation</h3>
 
   <p align="center">
-    Hello! welcome to my technicalevaluation.
+    Hello! welcome to my technical evaluation.
     <br />
     <a href="https://github.com/abrahamcastelancruz/jaque"><strong>Explore the docs »</strong></a>
     <br />
@@ -52,7 +52,8 @@ This is my front-end technical evaluation.
 
 ### Built With
 
-- [Angular](https://angular.io/)
+- [Angular 11.1.1](https://angular.io/)
+- [Node 14.16.0](https://nodejs.org/)
 - [Font Awesome](https://fontawesome.com/)
 - [Firebase](https://firebase.google.com/)
 - [Chart.js](https://www.chartjs.org/)

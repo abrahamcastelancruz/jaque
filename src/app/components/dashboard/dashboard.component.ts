@@ -13,13 +13,16 @@ import {
   styleUrls: ['./dashboard.component.styl'],
 })
 export class DashboardComponent implements OnInit {
+  // Font Awesome Icons Properties
   faUser = faUserAlt;
   faCar = faCar;
   faLogOut = faSignOutAlt;
+
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
+  // SignOut method & routing to login
   logOut() {
     this.auth.logOut();
     this.router.navigateByUrl('/login');

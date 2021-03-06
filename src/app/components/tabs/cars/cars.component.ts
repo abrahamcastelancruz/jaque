@@ -25,7 +25,6 @@ export class CarsComponent implements OnInit {
 
   getSales() {
     this.salesService.listSales().subscribe((res: any) => {
-      //console.log(res.sales);
       const ids = res.sales.map((res) => res.quantity);
       const dates = res.sales.map((res) => res.date);
       const quantities = res.sales.map((res) => res.quantity);

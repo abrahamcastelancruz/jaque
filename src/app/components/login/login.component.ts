@@ -17,10 +17,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.styl'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  togglePassword = true;
+  // Font Awesome Icons Properties
   faFacebook = faFacebookSquare;
   faGoogle = faGoogle;
+
+  // General properties
+  loginForm: FormGroup;
+  togglePassword = true;
   user: UserModel;
 
   constructor(
@@ -34,11 +37,12 @@ export class LoginComponent implements OnInit {
     this.user = new UserModel();
   }
 
+  // Initializing login form
   initializeForm(): void {
     this.loginForm = this.fb.group({
       email: new FormControl('', [
         Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'), // Defining Regex to validate email Form Control
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -47,10 +51,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // Function to validate error in login form
   hasError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName);
   };
 
+  // login method
   login() {
     if (this.loginForm.valid) {
       Swal.fire({
@@ -60,7 +66,7 @@ export class LoginComponent implements OnInit {
         allowOutsideClick: false,
       });
       Swal.showLoading();
-      const { email, password } = this.loginForm.value;
+      const { email, password } = this.loginForm.value; // Destructuring login forms
       this.user = {
         email: email,
         password: password,
@@ -80,6 +86,4 @@ export class LoginComponent implements OnInit {
       );
     }
   }
-
-  googleLogin() {}
 }

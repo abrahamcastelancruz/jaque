@@ -7,12 +7,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private url = 'https://identitytoolkit.googleapis.com/v1/accounts:sign';
-  private apiKey = 'AIzaSyC_rKyfYg4RNXYeM76857LmT5_RLsnOY1o';
+  private url = 'https://identitytoolkit.googleapis.com/v1/accounts:sign'; // Base Firebase API
+  private apiKey = 'AIzaSyC_rKyfYg4RNXYeM76857LmT5_RLsnOY1o'; // Firebase APIKEY
   private userToken: string;
 
   constructor(private http: HttpClient) {
-    this.readToken();
+    this.readToken(); // Verifying if token exists in LocalStorage
   }
 
   loginEmailPassword(user: UserModel) {
@@ -20,7 +20,6 @@ export class AuthService {
       ...user,
       returnSecureToken: true,
     };
-
     return this.http
       .post(`${this.url}InWithPassword?key=${this.apiKey}`, authData)
       .pipe(
