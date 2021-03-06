@@ -1,3 +1,4 @@
+import { UserModel } from './../../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,7 +8,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faFacebookSquare, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { AuthService } from '../../shared/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -19,15 +21,17 @@ export class LoginComponent implements OnInit {
   togglePassword = true;
   faFacebook = faFacebookSquare;
   faGoogle = faGoogle;
+  user: UserModel;
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.user = new UserModel();
   }
 
   initializeForm(): void {
@@ -49,12 +53,33 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Inciando Sesión....',
+        text: 'Espera un momento por favor',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
       const { email, password } = this.loginForm.value;
-      this.auth.loginEmailPassword(email, password);
+      this.user = {
+        email: email,
+        password: password,
+      };
+      this.auth.loginEmailPassword(this.user).subscribe(
+        (res) => {
+          Swal.close();
+          this.router.navigateByUrl('/dashboard');
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Opss..',
+            text: error.error.error.message,
+          });
+        }
+      );
     }
   }
 
-  googleLogin() {
-    this.auth.googleLogin();
-  }
+  googleLogin() {}
 }

@@ -1,2 +1,39 @@
-<p>dashboard works!</p>
-<a (click)="logOut()">LogOut</a>
+<mat-toolbar class="toolbar" color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>Dashboard</h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list class="navList">
+      <a
+        mat-list-item
+        [routerLink]="['/dashboard', { outlets: { sideNav: ['users'] } }]"
+        (click)="sidenav.toggle()"
+      >
+        <fa-icon [icon]="faUser"></fa-icon>
+        <span>Listar Usuarios</span>
+      </a>
+      <a
+        mat-list-item
+        [routerLink]="['/dashboard', { outlets: { sideNav: ['cars'] } }]"
+        (click)="sidenav.toggle()"
+      >
+        <fa-icon [icon]="faCar"></fa-icon>
+        <span>Gráfica Vehículos</span>
+      </a>
+      <a mat-list-item (click)="logOut()">
+        <fa-icon [icon]="faLogOut"></fa-icon>
+        <span>Cerrar Sesión</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="sideNav">
+      <router-outlet name="sideNav"></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

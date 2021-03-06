@@ -1,4 +1,4 @@
-import { User } from './../../shared/models/User.model';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -6,8 +6,10 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth-service.service';
+import { UserModel } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmedValidator } from 'src/app/shared/validators/ConfrmValidator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -18,12 +20,17 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   togglePassword = true;
   toggleConfirmPassword = true;
-  user: User;
+  user: UserModel;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.user = new UserModel();
   }
 
   initializeForm(): void {
@@ -49,13 +56,32 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Creando Cuenta....',
+        text: 'Espera un momento por favor',
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
       const { username, email, password } = this.registerForm.value;
       this.user = {
-        userName: username,
         email: email,
         password: password,
+        name: username,
       };
-      this.auth.register(this.user);
+      this.auth.newUser(this.user).subscribe(
+        (res) => {
+          Swal.close();
+          this.router.navigateByUrl('/dashboard');
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Opss..',
+            text: error.error.error.message,
+          });
+        }
+      );
     }
   }
 
