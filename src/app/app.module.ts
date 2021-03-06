@@ -24,8 +24,20 @@ import { MatIconModule } from '@angular/material/icon';
 // Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+// Services
+import { AuthService } from './shared/services/auth-service.service';
+
+// Guards
+import { AuthGuard } from './guards/auth-guard.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +52,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

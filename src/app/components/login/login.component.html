@@ -20,7 +20,10 @@
               formControlName="email"
               placeholder="someone@somemail.com"
             />
-            <mat-error *ngIf="loginForm.get('email').invalid">
+            <mat-error *ngIf="hasError('email', 'required')">
+              Debes ingresar un <strong>correo</strong>
+            </mat-error>
+            <mat-error *ngIf="hasError('email', 'pattern')">
               Debes ingresar un correo <strong>válido</strong>
             </mat-error>
           </mat-form-field>
@@ -43,8 +46,11 @@
                 togglePassword ? "visibility_off" : "visibility"
               }}</mat-icon>
             </button>
-            <mat-error *ngIf="loginForm.get('password').invalid">
-              Debes ingresar una contraseña
+            <mat-error *ngIf="hasError('password', 'minlength')">
+              La contraseña debe ser mínimo de <strong>6 caracteres</strong>
+            </mat-error>
+            <mat-error *ngIf="hasError('password', 'required')">
+              Debes ingresar una <strong>contraseña</strong>
             </mat-error>
           </mat-form-field>
           <a class="forgot-password">¿Perdiste tu contraseña?</a>
@@ -53,6 +59,7 @@
             class="btn login-btn"
             mat-raised-button
             (click)="login()"
+            [disabled]="loginForm.invalid"
           >
             Iniciar Sesión
           </button>
@@ -62,11 +69,7 @@
         </a>
         <hr />
         <div class="social-login">
-          <button mat-raised-button class="btn facebook">
-            <fa-icon [icon]="faFacebook" class="icon"></fa-icon>
-            <span class="button-text">Inicia sesión con Facebook</span>
-          </button>
-          <button mat-raised-button class="btn google">
+          <button mat-raised-button class="btn google" (click)="googleLogin()">
             <fa-icon [icon]="faGoogle" class="icon google-icon"></fa-icon>
             <span class="button-text">Inicia sesión con Google</span>
           </button>
